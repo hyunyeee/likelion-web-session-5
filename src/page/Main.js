@@ -3,6 +3,9 @@ import Modal from "../components/Modal";
 import {useState} from "react";
 import logo from "../assets/image/icon_logo.png";
 import serch from "../assets/image/serch.svg";
+import Movies from "../components/Movies";
+
+//todo 로그인 기능 구현
 
 
 const Logo = styled.img`
@@ -16,14 +19,25 @@ const Nav = styled.nav`
   display: flex;
   justify-content: center;
   position: fixed;
+align-items: center;
+  background-color: white;
+  top: 0;
 `
 
 const Ul = styled.ul`
+  width: 90%;
   display: flex;
   flex-direction: row;
-  align-content: space-around;
-  align-items: center;
+  justify-content: space-between;
+
   cursor: pointer;
+`
+
+const Menus = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
 `
 
 const Menu = styled.li`
@@ -39,7 +53,6 @@ const SerchBar = styled.div`
   justify-content: center;
   align-content: center;
   line-height: 23px;
-  margin-left: 250px;
   padding: 10px;
 `
 
@@ -54,7 +67,10 @@ const SerchInput = styled.input`
   padding: 5px;
   background-color: transparent;
   font-size: 14px;
-  :focus {outline:none;}
+
+  :focus {
+    outline: none;
+  }
 
 `
 
@@ -74,6 +90,19 @@ const SignBtn = styled.button`
   cursor: pointer;
 `
 
+const Container = styled.div`
+  border: 1px solid black;
+  margin: 66px auto;
+  width: 90%;
+
+`
+const Title = styled.p`
+  margin: 20px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #292a32
+`
+
 const Main = () => {
     const [modalIsClicked, setModalIsClicked] = useState(false);
 
@@ -88,32 +117,39 @@ const Main = () => {
             <header>
                 <Nav>
                     <Ul>
-                        <li><Logo src={logo}/></li>
-                        <Menu>영화</Menu>
-                        <Menu>TV</Menu>
-                        <Menu>책</Menu>
-                        <Menu>웹툰</Menu>
-                        <SerchBar>
-                            <SerchLogo src={serch} />
-                            <SerchInput placeholder="콘텐츠, 인물, 컬렉션, 유저를 검색해보세요." />
-                        </SerchBar>
-                        <li>
-                            <LoginBtn onClick={onClick}>로그인</LoginBtn>
-                        </li>
-                        <li>
-                            <SignBtn>회원가입</SignBtn>
-                        </li>
+                        <Menus>
+                            <li><Logo src={logo}/></li>
+                            <Menu>영화</Menu>
+                            <Menu>TV</Menu>
+                            <Menu>책</Menu>
+                            <Menu>웹툰</Menu>
+                        </Menus>
+
+
+                        <Menus>
+                            <SerchBar>
+                                <SerchLogo src={serch}/>
+                                <SerchInput placeholder="콘텐츠, 인물, 컬렉션, 유저를 검색해보세요."/>
+                            </SerchBar>
+                            <li>
+                                <LoginBtn onClick={onClick}>로그인</LoginBtn>
+                                {modalIsClicked ? <Modal onClick={onClick}/> : <></>}
+                            </li>
+                            <li>
+                                <SignBtn>회원가입</SignBtn>
+                            </li>
+                        </Menus>
+
                     </Ul>
                 </Nav>
-
-
-
-
-
             </header>
 
+            <Container>
+                <Title>박스오피스 순위</Title>
+                <Movies/>
 
-            {modalIsClicked ? <Modal onClick={onClick}/> : <></>}
+
+            </Container>
 
 
         </>
