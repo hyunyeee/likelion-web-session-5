@@ -11,10 +11,12 @@ const Wrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
 `
 const ModalWrapper = styled.div`
+  z-index: 10;
   background-color: #FFFFFF;
   width: 375px;
   height: 634px;
@@ -24,6 +26,7 @@ const ModalWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin: 80px auto;
+  cursor: auto;
 `
 const Logo = styled.img`
   margin: 20px auto 0 auto;
@@ -47,6 +50,7 @@ const SignupBtn = styled.button`
   border: none;
   font-size: 100%;
   font-weight: bold;
+  cursor: pointer;
 `
 const Input = styled.input`
   background-color: #F5F5F5;
@@ -66,6 +70,7 @@ const SubmitBtn = styled.button`
   width: 335px;
   height: 44px;
   color: #FFF;
+  cursor: pointer;
 `
 const Text = styled.a`
   color: #8E8E8E;
@@ -90,6 +95,7 @@ const Icons = styled.div`
   margin-bottom: 45px;
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 `
 const SocialIcon = styled.img`
   width: 50px;
@@ -122,7 +128,7 @@ const Modal = (props) => {
                     <LogIn>로그인</LogIn>
                     <Form>
                         <Input placeholder={`이메일`}/>
-                        <Input placeholder={`비밀번호`}/>
+                        <Input type="password" placeholder={`비밀번호`}/>
                         <SubmitBtn>로그인</SubmitBtn>
                     </Form>
 

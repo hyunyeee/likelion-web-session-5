@@ -3,27 +3,36 @@ import styled from "styled-components";
 import Movie from "./Movie";
 import {DATA} from "../assets/Data";
 
-const MovieWrapper = styled.div`
-
-  width: 90%;
-  margin: 20px;
-  border: 1px solid #ffb9b9;
+const ShowMovieWrapper = styled.div`
+  width: 93%;
+  margin: 0 20px 20px 20px;
   padding: 10px;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
 `
-
-//todo map함수로 Movie 뿌리기
+const MovieWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  overflow-y: scroll;
+`
 
 
 const Movies = () => {
     return (
         <>
-            <MovieWrapper>
+            <ShowMovieWrapper>
 
-                <Movie data={DATA}/>
+                <MovieWrapper>
+                    {DATA.map((movie, index) =>
+                        <Movie key={index} movie={movie}/>
+                    )}
+                </MovieWrapper>
 
 
-
-            </MovieWrapper>
+            </ShowMovieWrapper>
         </>
     );
 };

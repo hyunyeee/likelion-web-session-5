@@ -6,20 +6,19 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 250px;
+  z-index: -1;
   align-items: center;
 `
 const Container = styled.div`
   position: relative;
-  
   border: 1px solid #eae9e8;
   border-radius: 8px;
-  width: 230px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 5px;
-
+  width: 250px;
+  overflow: hidden;
 `
 const Rank = styled.div`
   position: absolute;
@@ -36,59 +35,59 @@ const Rank = styled.div`
   text-align: center;
   font-size: 23px;
   line-height: 35px;
-
 `
-
-const Img = styled.div`
-  margin: 10px;
-  //border: 1px solid black;
-  width: 210px;
-  height: 300px;
-`
-
 const Poster = styled.img`
   width: 100%;
   height: 100%;
-
+  object-fit: cover;
 `
-
 const TextBox = styled.div`
-  border: 1px solid black;
-  width: 230px;
+  width: 250px;
+  font-weight: bold;
+`
+const Title = styled.div`
+  color: #292A31;
+  padding: 4px;
+`
+const YearCountry = styled.div`
+  color: #32333A;
+  font-size: 15px;
+  padding: 4px;
+`
+const Average = styled.div`
+  color: #545765;
+  font-size: 15px;
+  padding: 4px;
+`
+const People = styled.div`
+  color: #74747A;
+  font-size: 13px;
+  padding: 4px;
 `
 
 
 const Movie = (props) => {
-    const {data} = props;
+    const {movie} = props;
+    const total = Number(movie.audience) > 9999 ? Number(movie.audience)/10000 + "만 명" : movie.audience + "명";
 
-
-    console.log(data[0].img)
 
     return (
         <>
             <Wrapper>
                 <Container>
                     <Rank>
-                        {data[0].rank}
+                        {movie.rank}
                     </Rank>
-                    <Img>
-                        <Poster src={data[0].img} />
-                    </Img>
+                    <Poster src={movie.img}/>
                 </Container>
 
                 <TextBox>
-                    <p>{data[0].title}</p>
-                    <p>{data[0].year}</p>
-                    <p>{data[0].country}</p>
-                    <p>평균 . {data[0].average}</p>
-                    <p>예매율{data[0].percent} . </p>
-                    <p>누적 관객{data[0].audience}</p>
-
-
+                    <Title>{movie.title}</Title>
+                    <YearCountry>{movie.year} · {movie.country}</YearCountry>
+                    <Average>평균 ★ {movie.average}</Average>
+                    <People>예매율{movie.percent} · 누적 관객 {total}</People>
                 </TextBox>
-
             </Wrapper>
-
         </>
     );
 };

@@ -5,14 +5,11 @@ import logo from "../assets/image/icon_logo.png";
 import serch from "../assets/image/serch.svg";
 import Movies from "../components/Movies";
 
-//todo 로그인 기능 구현
-
 
 const Logo = styled.img`
   width: 150px;
   padding-right: 20px;
 `
-
 const Nav = styled.nav`
   border: 1px solid #EBEBEB;
   width: 100%;
@@ -23,30 +20,24 @@ align-items: center;
   background-color: white;
   top: 0;
 `
-
 const Ul = styled.ul`
   width: 90%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
   cursor: pointer;
 `
-
 const Menus = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-
 `
-
 const Menu = styled.li`
   color: #7E7E7E;
   padding: 5px 15px;
   font-weight: bold;
   margin: 20px auto;
 `
-
 const SerchBar = styled.div`
   background-color: #F5F5F7;
   display: flex;
@@ -55,7 +46,6 @@ const SerchBar = styled.div`
   line-height: 23px;
   padding: 10px;
 `
-
 const SerchLogo = styled.img`
   width: 20px;
   padding: 3px;
@@ -67,13 +57,10 @@ const SerchInput = styled.input`
   padding: 5px;
   background-color: transparent;
   font-size: 14px;
-
   :focus {
     outline: none;
   }
-
 `
-
 const LoginBtn = styled.button`
   width: 80px;
   height: 30px;
@@ -89,29 +76,23 @@ const SignBtn = styled.button`
   border-radius: 8px;
   cursor: pointer;
 `
-
 const Container = styled.div`
-  border: 1px solid black;
   margin: 66px auto;
   width: 90%;
-
 `
 const Title = styled.p`
-  margin: 20px;
+  margin: auto 20px;
+  padding: 40px 20px 0 20px;
   font-size: 22px;
-  font-weight: 700;
+  font-weight: bold;
   color: #292a32
 `
-
 const Main = () => {
     const [modalIsClicked, setModalIsClicked] = useState(false);
-
     const onClick = () => {
         setModalIsClicked((prev) => !prev)
     }
     console.log(modalIsClicked)
-
-
     return (
         <>
             <header>
@@ -124,7 +105,6 @@ const Main = () => {
                             <Menu>책</Menu>
                             <Menu>웹툰</Menu>
                         </Menus>
-
 
                         <Menus>
                             <SerchBar>
@@ -139,7 +119,6 @@ const Main = () => {
                                 <SignBtn>회원가입</SignBtn>
                             </li>
                         </Menus>
-
                     </Ul>
                 </Nav>
             </header>
@@ -147,11 +126,7 @@ const Main = () => {
             <Container>
                 <Title>박스오피스 순위</Title>
                 <Movies/>
-
-
             </Container>
-
-
         </>
     );
 };
