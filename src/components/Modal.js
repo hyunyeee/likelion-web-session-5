@@ -29,6 +29,11 @@ const Logo = styled.img`
   margin: 20px auto 0 auto;
   width: 198px;
 `
+const LogIn = styled.p`
+  font-size: 18px;
+  font-weight: bold;
+  padding: 20px;
+`
 const Form = styled.form`
   width: 335px;
   height: 200px;
@@ -50,6 +55,8 @@ const Input = styled.input`
   border: none;
   border-radius: 8px;
   margin: 5px 0;
+  padding-left: 10px;
+  font-size: 15px;
 `
 const SubmitBtn = styled.button`
   background-color: #FF2F6E;
@@ -97,20 +104,22 @@ const Msg = styled.div`
   background-color: #F7F7F7;
   width: 309px;
   height: 46px;
-  padding: 10px 13px;
+  padding-top: 13px;
   text-align: center;
 `
 
 
 const Modal = (props) => {
 
+    const {onClick} = props;
 
     return (
         <>
             <Wrapper>
                 <ModalWrapper>
+                    <button onClick={onClick}>X</button>
                     <Logo src={logo} alt={"logo"}/>
-                    <h3>로그인</h3>
+                    <LogIn>로그인</LogIn>
                     <Form>
                         <Input placeholder={`이메일`}/>
                         <Input placeholder={`비밀번호`}/>
