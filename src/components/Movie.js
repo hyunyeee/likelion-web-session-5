@@ -1,6 +1,41 @@
 import React from 'react';
 import styled from "styled-components";
+import {useNavigate} from "react-router-dom";
 
+
+
+const Movie = (props) => {
+    const {movie} = props;
+    const total = Number(movie.audience) > 9999 ? Number(movie.audience)/10000 + "만 명" : movie.audience + "명";
+
+    const navigate = useNavigate();
+
+    const onClick = () => {
+        navigate(`/movie/${movie.rank}`);
+        console.log("눌림")
+    }
+
+
+    return (
+        <div onClick={onClick}>
+            <Wrapper>
+                <Container>
+                    <Rank>
+                        {movie.rank}
+                    </Rank>
+                    <Poster src={movie.img}/>
+                </Container>
+
+                <TextBox >
+                    <Title>{movie.title}</Title>
+                    <YearCountry>{movie.year} · {movie.country}</YearCountry>
+                    <Average>평균 ★ {movie.average}</Average>
+                    <People>예매율{movie.percent} · 누적 관객 {total}</People>
+                </TextBox>
+            </Wrapper>
+        </div>
+    );
+};
 
 const Wrapper = styled.div`
   display: flex;
@@ -40,6 +75,7 @@ const Poster = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+
 `
 const TextBox = styled.div`
   width: 250px;
@@ -64,32 +100,5 @@ const People = styled.div`
   font-size: 13px;
   padding: 4px;
 `
-
-
-const Movie = (props) => {
-    const {movie} = props;
-    const total = Number(movie.audience) > 9999 ? Number(movie.audience)/10000 + "만 명" : movie.audience + "명";
-
-
-    return (
-        <>
-            <Wrapper>
-                <Container>
-                    <Rank>
-                        {movie.rank}
-                    </Rank>
-                    <Poster src={movie.img}/>
-                </Container>
-
-                <TextBox>
-                    <Title>{movie.title}</Title>
-                    <YearCountry>{movie.year} · {movie.country}</YearCountry>
-                    <Average>평균 ★ {movie.average}</Average>
-                    <People>예매율{movie.percent} · 누적 관객 {total}</People>
-                </TextBox>
-            </Wrapper>
-        </>
-    );
-};
 
 export default Movie;

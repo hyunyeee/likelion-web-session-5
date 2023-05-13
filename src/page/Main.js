@@ -4,6 +4,7 @@ import {useState} from "react";
 import logo from "../assets/image/icon_logo.png";
 import serch from "../assets/image/serch.svg";
 import Movies from "../components/Movies";
+import {useNavigate} from "react-router-dom";
 
 
 const Logo = styled.img`
@@ -92,7 +93,9 @@ const Main = () => {
     const onClick = () => {
         setModalIsClicked((prev) => !prev)
     }
-    console.log(modalIsClicked)
+    const navigate = useNavigate();
+
+
     return (
         <>
             <header>
@@ -125,7 +128,15 @@ const Main = () => {
 
             <Container>
                 <Title>박스오피스 순위</Title>
-                <Movies/>
+                <Movies
+                    onClickMovie={(item) => {
+                    navigate(`/movie/${item.id}`);
+                    console.log(item.id)
+                }}
+                />
+
+
+
             </Container>
         </>
     );

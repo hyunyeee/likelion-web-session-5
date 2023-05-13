@@ -2,6 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 import Movie from "./Movie";
 import {DATA} from "../assets/Data";
+import {useNavigate} from "react-router-dom";
+
 
 const ShowMovieWrapper = styled.div`
   width: 93%;
@@ -20,12 +22,27 @@ const MovieWrapper = styled.div`
 `
 
 
-const Movies = () => {
+const Movies = (onClickMovie) => {
+
+    const navigate = useNavigate();
+
+    // const onClick = () => {
+    //     // navigate("/boards")
+    //     console.log("눌림")
+    // }
+
+
+
+
+
+
+
+
     return (
         <>
             <ShowMovieWrapper>
 
-                <MovieWrapper>
+                <MovieWrapper onclick={onClickMovie}>
                     {DATA.map((movie, index) =>
                         <Movie key={index} movie={movie}/>
                     )}
@@ -38,3 +55,6 @@ const Movies = () => {
 };
 
 export default Movies;
+
+
+//onClick={onClick}
