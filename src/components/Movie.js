@@ -3,22 +3,20 @@ import styled from "styled-components";
 import {useNavigate} from "react-router-dom";
 
 
-
 const Movie = (props) => {
     const {movie} = props;
-    const total = Number(movie.audience) > 9999 ? Number(movie.audience)/10000 + "만 명" : movie.audience + "명";
+    const total = Number(movie.audience) > 9999 ? Number(movie.audience) / 10000 + "만 명" : movie.audience + "명";
 
     const navigate = useNavigate();
 
     const onClick = () => {
         navigate(`/movie/${movie.rank}`);
-        console.log("눌림")
     }
 
 
     return (
-        <div onClick={onClick}>
-            <Wrapper>
+        <>
+            <Wrapper onClick={onClick}>
                 <Container>
                     <Rank>
                         {movie.rank}
@@ -26,14 +24,14 @@ const Movie = (props) => {
                     <Poster src={movie.img}/>
                 </Container>
 
-                <TextBox >
+                <TextBox>
                     <Title>{movie.title}</Title>
                     <YearCountry>{movie.year} · {movie.country}</YearCountry>
                     <Average>평균 ★ {movie.average}</Average>
                     <People>예매율{movie.percent} · 누적 관객 {total}</People>
                 </TextBox>
             </Wrapper>
-        </div>
+        </>
     );
 };
 
@@ -41,7 +39,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  z-index: -1;
   align-items: center;
 `
 const Container = styled.div`
@@ -75,7 +72,6 @@ const Poster = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-
 `
 const TextBox = styled.div`
   width: 250px;

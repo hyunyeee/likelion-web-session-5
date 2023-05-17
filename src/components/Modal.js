@@ -8,15 +8,16 @@ import apple from "../assets/image/icon_apple.png"
 
 
 const Wrapper = styled.div`
-  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+
 `
 const ModalWrapper = styled.div`
-  z-index: 10;
   background-color: #FFFFFF;
   width: 375px;
   height: 634px;

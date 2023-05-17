@@ -1,33 +1,27 @@
 import "./App.css";
-import RandomClass from "./scss/RandomClass";
-import Button from "./scss/Button";
-import Circle from "./styled-components/Circle";
 import Main from "./page/Main";
 import GlobalStyle from "../src/components/GlobalStyle"
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Board from "./page/MovieDetail";
 import MovieDetail from "./page/MovieDetail";
-//import "normalize.css"
-//import {reset} from "styled-reset";
+import NavBar from "./components/NavBar";
 
 
 function App() {
+
+
     return (
         <>
             <>
                 <GlobalStyle/>
                 <BrowserRouter>
+                    <NavBar/>
                     <Routes>
-
-                        <Route index element={<Main />} />
-                        <Route path={"/movie/:id"} element={<MovieDetail />} />
-
+                        <Route index element={<Main/>}/>
+                        <Route path={"/movie/:id"} element={<MovieDetail/>}/>
                     </Routes>
-
                 </BrowserRouter>
             </>
         </>
-
     )
         ;
 }

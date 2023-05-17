@@ -19,23 +19,11 @@ const MovieWrapper = styled.div`
   flex-direction: row;
   align-items: flex-start;
   overflow-y: scroll;
+  cursor: pointer;
 `
 
 
 const Movies = (onClickMovie) => {
-
-    const navigate = useNavigate();
-
-    // const onClick = () => {
-    //     // navigate("/boards")
-    //     console.log("눌림")
-    // }
-
-
-
-
-
-
 
 
     return (
