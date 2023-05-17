@@ -6,7 +6,6 @@ import {useNavigate} from "react-router-dom";
 const Movie = (props) => {
     const {movie} = props;
     const total = Number(movie.audience) > 9999 ? Number(movie.audience) / 10000 + "만 명" : movie.audience + "명";
-
     const navigate = useNavigate();
 
     const onClick = () => {

@@ -3,6 +3,44 @@ import {DATA} from "../assets/Data";
 import {useParams} from "react-router-dom";
 import styled from "styled-components";
 
+
+const MovieDetail = (props) => {
+    const movieRank = useParams()
+    const rank = DATA[movieRank.id - 1];
+    const total = Number(rank.audience) > 9999 ? Number(rank.audience) / 10000 + "만 명" : rank.audience + "명";
+
+
+    return (
+        <>
+            <Wrapper>
+                <BgImgBox bgColor={rank.bgColor}>
+                    <ImgDiv>
+                        <BgImg src={rank.bg} alt={"movieImg"}/>
+                    </ImgDiv>
+                    <Info>
+                        예매순위 {rank.rank} 누적 관객 {total}
+                    </Info>
+                </BgImgBox>
+
+                <DataBox>
+                    <Poster src={rank.img} alt={"movieImg"}/>
+
+                    <TextBox>
+                        <Text>
+                            <Title>{rank.title}</Title>
+                            <YearCountry>{rank.year} · {rank.country}</YearCountry>
+                            <hr />
+                            <Average>평균 ★ {rank.average}</Average>
+                            <hr />
+                        </Text>
+                    </TextBox>
+                </DataBox>
+            </Wrapper>
+        </>
+    );
+};
+
+
 const Wrapper = styled.div`
   width: 100%;
   margin: 0 auto;
@@ -10,9 +48,8 @@ const Wrapper = styled.div`
 const BgImgBox = styled.div`
   width: 100%;
   height: 300px;
-
   ${props => props.bgColor &&
-          `background-color: ${props.bgColor};
+    `background-color: ${props.bgColor};
           `}
 `
 const ImgDiv = styled.div`
@@ -70,40 +107,6 @@ const TextBox = styled.div`
   width: 100%;
   height: 100%;
 `
-const MovieDetail = (props) => {
-    const movieRank = useParams()
-    const rank = DATA[movieRank.id - 1];
-    const total = Number(rank.audience) > 9999 ? Number(rank.audience) / 10000 + "만 명" : rank.audience + "명";
 
-
-    return (
-        <>
-            <Wrapper>
-                <BgImgBox bgColor={rank.bgColor}>
-                    <ImgDiv>
-                        <BgImg src={rank.bg} alt={"movieImg"}/>
-                    </ImgDiv>
-                    <Info>
-                        예매순위 {rank.rank} 누적 관객 {total}
-                    </Info>
-                </BgImgBox>
-
-                <DataBox>
-                    <Poster src={rank.img} alt={"movieImg"}/>
-
-                    <TextBox>
-                        <Text>
-                            <Title>{rank.title}</Title>
-                            <YearCountry>{rank.year} · {rank.country}</YearCountry>
-                            <hr />
-                            <Average>평균 ★ {rank.average}</Average>
-                            <hr />
-                        </Text>
-                    </TextBox>
-                </DataBox>
-            </Wrapper>
-        </>
-    );
-};
 
 export default MovieDetail;

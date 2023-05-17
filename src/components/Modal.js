@@ -7,6 +7,55 @@ import twitter from "../assets/image/icon_twitter.png"
 import apple from "../assets/image/icon_apple.png"
 
 
+const Modal = (props) => {
+
+    const {onClick} = props;
+
+    return (
+        <>
+            <Wrapper>
+                <ModalWrapper>
+                    <button onClick={onClick}>X</button>
+                    <Logo src={logo} alt={"logo"}/>
+                    <LogIn>로그인</LogIn>
+                    <Form>
+                        <Input placeholder={`이메일`}/>
+                        <Input type="password" placeholder={`비밀번호`}/>
+                        <SubmitBtn>로그인</SubmitBtn>
+                    </Form>
+
+                    <Messages>
+                        <SignupBtn>비밀번호를 잊어버리셨나요?</SignupBtn>
+                        <div>
+                            <Text>계정이 없으신가요?</Text><SignupBtn>회원가입</SignupBtn>
+                        </div>
+
+                        <OR>
+                            <Line/>
+                            <Text>OR</Text>
+                            <Line/>
+                        </OR>
+                    </Messages>
+
+                    <Icons>
+                        <SocialIcon src={kakao}/>
+                        <SocialIcon src={google}/>
+                        <SocialIcon src={twitter}/>
+                        <SocialIcon src={apple}/>
+                        <SocialIcon src={line}/>
+                    </Icons>
+
+                    <Msg>
+                        TIP.왓챠 계정이 있으신가요? 왓챠와 왓챠피디아는 같은 계정을 사용해요.
+                    </Msg>
+                </ModalWrapper>
+            </Wrapper>
+
+        </>
+    )
+};
+
+
 const Wrapper = styled.div`
   z-index: 100;
   background-color: rgba(0, 0, 0, 0.5);
@@ -114,55 +163,5 @@ const Msg = styled.div`
   padding-top: 13px;
   text-align: center;
 `
-
-
-const Modal = (props) => {
-
-    const {onClick} = props;
-
-    return (
-        <>
-            <Wrapper>
-                <ModalWrapper>
-                    <button onClick={onClick}>X</button>
-                    <Logo src={logo} alt={"logo"}/>
-                    <LogIn>로그인</LogIn>
-                    <Form>
-                        <Input placeholder={`이메일`}/>
-                        <Input type="password" placeholder={`비밀번호`}/>
-                        <SubmitBtn>로그인</SubmitBtn>
-                    </Form>
-
-                    <Messages>
-                        <SignupBtn>비밀번호를 잊어버리셨나요?</SignupBtn>
-                        <div>
-                            <Text>계정이 없으신가요?</Text><SignupBtn>회원가입</SignupBtn>
-                        </div>
-
-                        <OR>
-                            <Line/>
-                            <Text>OR</Text>
-                            <Line/>
-                        </OR>
-                    </Messages>
-
-                    <Icons>
-                        <SocialIcon src={kakao}/>
-                        <SocialIcon src={google}/>
-                        <SocialIcon src={twitter}/>
-                        <SocialIcon src={apple}/>
-                        <SocialIcon src={line}/>
-                    </Icons>
-
-                    <Msg>
-                        TIP.왓챠 계정이 있으신가요? 왓챠와 왓챠피디아는 같은 계정을 사용해요.
-                    </Msg>
-                </ModalWrapper>
-            </Wrapper>
-
-        </>
-    )
-};
-
 
 export default Modal;

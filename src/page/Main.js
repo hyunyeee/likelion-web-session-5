@@ -5,17 +5,7 @@ import Movies from "../components/Movies";
 import {useNavigate} from "react-router-dom";
 import NavBar from "../components/NavBar";
 
-const Wrapper = styled.div`
-  margin: 66px auto;
-  width: 90%;
-`
-const Title = styled.p`
-  margin: auto 20px;
-  padding: 40px 20px 0 20px;
-  font-size: 22px;
-  font-weight: bold;
-  color: #292a32
-`
+
 const Main = () => {
     const [modalIsClicked, setModalIsClicked] = useState(false);
     const onClick = () => {
@@ -41,12 +31,24 @@ const Main = () => {
                             console.log(item.id)
                         }}
                     />
-                    {modalIsClicked ? <Modal onClick={onClick}/> : <></>}
+                    {modalIsClicked && <Modal onClick={onClick}/>}
                 </>
             </Wrapper>
         </>
     );
 };
+
+const Wrapper = styled.div`
+  margin: 66px auto;
+  width: 90%;
+`
+const Title = styled.p`
+  margin: auto 20px;
+  padding: 40px 20px 0 20px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #292a32
+`
 
 
 export default Main;
