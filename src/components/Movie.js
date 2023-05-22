@@ -4,12 +4,10 @@ import {useNavigate} from "react-router-dom";
 
 
 const Movie = (props) => {
-    const {movie} = props;
-    const total = Number(movie.audience) > 9999 ? Number(movie.audience) / 10000 + "만 명" : movie.audience + "명";
+    const {movie, rank} = props;
     const navigate = useNavigate();
-
     const onClick = () => {
-        navigate(`/movie/${movie.rank}`);
+        navigate(`/movie/${rank+1}`);
     }
 
 
@@ -18,16 +16,14 @@ const Movie = (props) => {
             <Wrapper onClick={onClick}>
                 <Container>
                     <Rank>
-                        {movie.rank}
+                        {rank+1}
                     </Rank>
-                    <Poster src={movie.img}/>
+                    <Poster src={`https://image.tmdb.org/t/p/w500`+ movie.poster_path }/>
                 </Container>
 
                 <TextBox>
                     <Title>{movie.title}</Title>
-                    <YearCountry>{movie.year} · {movie.country}</YearCountry>
-                    <Average>평균 ★ {movie.average}</Average>
-                    <People>예매율{movie.percent} · 누적 관객 {total}</People>
+                    <InfoTxt>{movie.release_date.slice(0,4)} · ★{movie.vote_average} </InfoTxt>
                 </TextBox>
             </Wrapper>
         </>
@@ -80,20 +76,11 @@ const Title = styled.div`
   color: #292A31;
   padding: 4px;
 `
-const YearCountry = styled.div`
+const InfoTxt = styled.div`
   color: #32333A;
   font-size: 15px;
   padding: 4px;
 `
-const Average = styled.div`
-  color: #545765;
-  font-size: 15px;
-  padding: 4px;
-`
-const People = styled.div`
-  color: #74747A;
-  font-size: 13px;
-  padding: 4px;
-`
+
 
 export default Movie;

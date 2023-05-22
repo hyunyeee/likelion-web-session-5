@@ -14,7 +14,6 @@ const Main = () => {
     }
     const navigate = useNavigate();
 
-    console.log(modalIsClicked)
 
     return (
         <>
@@ -28,7 +27,6 @@ const Main = () => {
                     <Movies
                         onClickMovie={(item) => {
                             navigate(`/movie/${item.id}`);
-                            console.log(item.id)
                         }}
                     />
                     {modalIsClicked && <Modal onClick={onClick}/>}

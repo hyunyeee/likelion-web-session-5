@@ -1,8 +1,50 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
 import Movie from "./Movie";
-import {DATA} from "../assets/Data";
-import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import {useEffect} from "react";
+
+
+const Movies = (onClickMovie) => {
+
+    const [movieData, setMovieData] = useState([]);
+
+
+    useEffect(() => {
+        const options = {
+            method: "GET",
+            headers: {
+                accept: "application/json",
+                Authorization: "Bearer " + process.env.REACT_APP_API_KEY,
+            },
+        };
+        axios.get(`https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1`,
+            options
+        )
+            .then(function (response) { // 성공했을 때
+                setMovieData(response.data.results)
+            })
+            .catch(function (error) { // 실패했을 때
+                console.log(error);
+            });
+
+    }, []);
+
+
+    return (
+        <>
+            <ShowMovieWrapper>
+                <MovieWrapper onclick={onClickMovie}>
+                    {movieData.map((movie, index) =>
+                        <Movie key={index} rank={index} movie={movie} />
+                    )}
+                </MovieWrapper>
+            </ShowMovieWrapper>
+        </>
+    );
+};
+
+export default Movies;
 
 
 const ShowMovieWrapper = styled.div`
@@ -21,28 +63,3 @@ const MovieWrapper = styled.div`
   overflow-y: scroll;
   cursor: pointer;
 `
-
-
-const Movies = (onClickMovie) => {
-
-
-    return (
-        <>
-            <ShowMovieWrapper>
-
-                <MovieWrapper onclick={onClickMovie}>
-                    {DATA.map((movie, index) =>
-                        <Movie key={index} movie={movie}/>
-                    )}
-                </MovieWrapper>
-
-
-            </ShowMovieWrapper>
-        </>
-    );
-};
-
-export default Movies;
-
-
-//onClick={onClick}

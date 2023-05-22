@@ -1,37 +1,57 @@
-import React, {useEffect} from 'react';
-import {DATA} from "../assets/Data";
+import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 
 
-const MovieDetail = (props) => {
+const MovieDetail = () => {
     const movieRank = useParams()
-    const rank = DATA[movieRank.id - 1];
-    const total = Number(rank.audience) > 9999 ? Number(rank.audience) / 10000 + "만 명" : rank.audience + "명";
+    const [movieData, setMovieData] = useState([]);
+    const [releaseDate, setReleaseDate] = useState("");
+
+    useEffect(() => {
+        const options = {
+            method: "GET",
+            headers: {
+                accept: "application/json",
+                Authorization: "Bearer " + process.env.REACT_APP_API_KEY,
+            },
+        };
+        axios.get(`https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1`,
+            options
+        )
+            .then(function (response) { // 성공했을 때
+                setMovieData(response.data.results[movieRank.id-1])
+            })
+            .catch(function (error) { // 실패했을 때
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        if (movieData.length !== 0) {
+            const slicedReleaseDate = movieData.release_date.slice(0, 4);
+            setReleaseDate(slicedReleaseDate);
+        }
+    }, [movieData]);
 
 
     return (
         <>
             <Wrapper>
-                <BgImgBox bgColor={rank.bgColor}>
-                    <ImgDiv>
-                        <BgImg src={rank.bg} alt={"movieImg"}/>
-                    </ImgDiv>
-                    <Info>
-                        예매순위 {rank.rank} 누적 관객 {total}
-                    </Info>
-                </BgImgBox>
-
+                <BgImgBox />
                 <DataBox>
-                    <Poster src={rank.img} alt={"movieImg"}/>
-
+                    <Poster src={`https://image.tmdb.org/t/p/w500`+ movieData.poster_path } alt={"movieImg"}/>
                     <TextBox>
                         <Text>
-                            <Title>{rank.title}</Title>
-                            <YearCountry>{rank.year} · {rank.country}</YearCountry>
+                            <Title>{movieData.title}</Title>
+                            <YearCountry>{releaseDate}</YearCountry>
                             <hr />
-                            <Average>평균 ★ {rank.average}</Average>
+                            <Average>평균 ★ {movieData.vote_average}</Average>
                             <hr />
+                            <TxTBox>
+                                {movieData.overview}
+                            </TxTBox>
                         </Text>
                     </TextBox>
                 </DataBox>
@@ -48,26 +68,12 @@ const Wrapper = styled.div`
 const BgImgBox = styled.div`
   width: 100%;
   height: 300px;
-  ${props => props.bgColor &&
-    `background-color: ${props.bgColor};
-          `}
+  background-color: #cecbcb;
 `
-const ImgDiv = styled.div`
-  width: 600px;
-  height: 300px;
-  margin: 0 auto;
-`
-const BgImg = styled.img`
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-`
-const Info = styled.div`
-  width: 800px;
-  height: 33px;
-  color: #CECED0;
-  font-weight: bold;
-  margin: -30px 37%;
+const TxTBox = styled.div`
+  width: 500px;
+  height: auto;
+  line-height: 1.5;
 `
 const DataBox = styled.div`
   width: 860px;
