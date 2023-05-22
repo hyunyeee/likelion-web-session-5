@@ -5,7 +5,8 @@ import axios from "axios";
 
 
 const MovieDetail = () => {
-    const movieRank = useParams()
+    const { id } = useParams()
+
     const [movieData, setMovieData] = useState([]);
     const [releaseDate, setReleaseDate] = useState("");
 
@@ -21,7 +22,7 @@ const MovieDetail = () => {
             options
         )
             .then(function (response) { // 성공했을 때
-                setMovieData(response.data.results[movieRank.id-1])
+                setMovieData(response.data.results[id-1])
             })
             .catch(function (error) { // 실패했을 때
                 console.log(error);
@@ -41,7 +42,7 @@ const MovieDetail = () => {
             <Wrapper>
                 <BgImgBox />
                 <DataBox>
-                    <Poster src={`https://image.tmdb.org/t/p/w500`+ movieData.poster_path } alt={"movieImg"}/>
+                    <Poster src={`https://image.tmdb.org/t/p/w500`+ movieData.poster_path} alt={"movieImg"}/>
                     <TextBox>
                         <Text>
                             <Title>{movieData.title}</Title>

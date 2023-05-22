@@ -8,8 +8,8 @@ import apple from "../assets/image/icon_apple.png"
 
 
 const Modal = (props) => {
-
     const {onClick} = props;
+
 
     return (
         <>
@@ -29,7 +29,6 @@ const Modal = (props) => {
                         <div>
                             <Text>계정이 없으신가요?</Text><SignupBtn>회원가입</SignupBtn>
                         </div>
-
                         <OR>
                             <Line/>
                             <Text>OR</Text>
@@ -50,7 +49,6 @@ const Modal = (props) => {
                     </Msg>
                 </ModalWrapper>
             </Wrapper>
-
         </>
     )
 };
@@ -64,7 +62,6 @@ const Wrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-
 `
 const ModalWrapper = styled.div`
   background-color: #FFFFFF;
