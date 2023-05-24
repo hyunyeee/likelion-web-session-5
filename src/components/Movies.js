@@ -6,7 +6,6 @@ import {useEffect} from "react";
 
 
 const Movies = (onClickMovie) => {
-
     const [movieData, setMovieData] = useState([]);
 
 
@@ -31,12 +30,17 @@ const Movies = (onClickMovie) => {
     }, []);
 
 
+    useEffect(() => {
+        console.log(movieData)
+    }, [movieData])
+
+
     return (
         <>
             <ShowMovieWrapper>
                 <MovieWrapper onclick={onClickMovie}>
                     {movieData.map((movie, index) =>
-                        <Movie key={index} rank={index} movie={movie} />
+                        <Movie key={index} rank={index} movie={movie}/>
                     )}
                 </MovieWrapper>
             </ShowMovieWrapper>

@@ -2,11 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import loadingLogo from "../assets/image/loadingLogo.svg"
 
 
 const MovieDetail = () => {
     const { id } = useParams()
-
+    const [isLoding, setIsLoading] = useState(false);
     const [movieData, setMovieData] = useState([]);
     const [releaseDate, setReleaseDate] = useState("");
 
@@ -18,11 +19,12 @@ const MovieDetail = () => {
                 Authorization: "Bearer " + process.env.REACT_APP_API_KEY,
             },
         };
-        axios.get(`https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1`,
+        axios.get(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR&page=1`,
             options
         )
             .then(function (response) { // 성공했을 때
-                setMovieData(response.data.results[id-1])
+                setMovieData(response.data)
+                setIsLoading(true)
             })
             .catch(function (error) { // 실패했을 때
                 console.log(error);
@@ -40,22 +42,30 @@ const MovieDetail = () => {
     return (
         <>
             <Wrapper>
-                <BgImgBox />
-                <DataBox>
-                    <Poster src={`https://image.tmdb.org/t/p/w500`+ movieData.poster_path} alt={"movieImg"}/>
-                    <TextBox>
-                        <Text>
-                            <Title>{movieData.title}</Title>
-                            <YearCountry>{releaseDate}</YearCountry>
-                            <hr />
-                            <Average>평균 ★ {movieData.vote_average}</Average>
-                            <hr />
-                            <TxTBox>
-                                {movieData.overview}
-                            </TxTBox>
-                        </Text>
-                    </TextBox>
-                </DataBox>
+
+                {isLoding ?
+                    <>
+                        <BgImgBox />
+                        <DataBox>
+                            <Poster src={`https://image.tmdb.org/t/p/w500`+ movieData.poster_path} alt={"movieImg"}/>
+                            <TextBox>
+                                <Text>
+                                    <Title>{movieData.title}</Title>
+                                    <YearCountry>{releaseDate}</YearCountry>
+                                    <hr />
+                                    <Average>평균 ★ {movieData.vote_average}</Average>
+                                    <hr />
+                                    <TxTBox>
+                                        {movieData.overview}
+                                    </TxTBox>
+                                </Text>
+                            </TextBox>
+                        </DataBox>
+                    </>
+                    :
+                    <Loading src={loadingLogo} />
+                }
+
             </Wrapper>
         </>
     );
@@ -113,6 +123,12 @@ const Average = styled.p`
 const TextBox = styled.div`
   width: 100%;
   height: 100%;
+`
+const Loading = styled.img`
+  width: 400px;
+  height: 400px;
+  display: block;
+  margin: 15% auto;
 `
 
 

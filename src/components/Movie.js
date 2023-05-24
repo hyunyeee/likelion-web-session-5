@@ -7,7 +7,7 @@ const Movie = (props) => {
     const {movie, rank} = props;
     const navigate = useNavigate();
     const onClick = () => {
-        navigate(`/movie/${rank+1}`);
+        navigate(`/movie/${movie.id}`);
     }
 
 
