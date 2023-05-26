@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import Movie from "./Movie";
 import axios from "axios";
-import {useEffect} from "react";
 
 
 const Movies = (onClickMovie) => {

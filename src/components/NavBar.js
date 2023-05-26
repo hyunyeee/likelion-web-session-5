@@ -9,15 +9,13 @@ const NavBar = (props) => {
     const [isMain, setIsMain] = useState(true);
     const {onClick} = props;
     const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        if (location.pathname === "/") {
+        location.pathname === "/" ?
             setIsMain(true)
-        } else {
-            setIsMain(false)
-        }
+            : setIsMain(false)
     }, [location]);
-    const navigate = useNavigate();
 
 
     return (
