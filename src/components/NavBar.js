@@ -9,15 +9,13 @@ const NavBar = (props) => {
     const [isMain, setIsMain] = useState(true);
     const {onClick} = props;
     const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        if(location.pathname === "/") {
+        location.pathname === "/" ?
             setIsMain(true)
-        }else {
-            setIsMain(false)
-        }
+            : setIsMain(false)
     }, [location]);
-    const navigate = useNavigate();
 
 
     return (
@@ -30,17 +28,16 @@ const NavBar = (props) => {
                     <Menu>책</Menu>
                     <Menu>웹툰</Menu>
                 </Menus>
-
                 <Menus>
                     <SerchBar isMain={isMain}>
-                        <SerchLogo src={serch} />
+                        <SerchLogo src={serch}/>
                         <SerchInput placeholder="콘텐츠, 인물, 컬렉션, 유저를 검색해보세요."/>
                     </SerchBar>
                     <li>
                         <LoginBtn isMain={isMain} onClick={onClick}>로그인</LoginBtn>
                     </li>
                     <li>
-                        <SignBtn isMain={isMain} >회원가입</SignBtn>
+                        <SignBtn isMain={isMain}>회원가입</SignBtn>
                     </li>
                 </Menus>
             </Ul>
@@ -54,14 +51,8 @@ const Logo = styled.img`
   padding-right: 20px;
 `
 const Nav = styled.nav`
-  background-color: transparent;
-  ${props => props.isMain &&
-    `background-color: white;
-          `}
-  border: none;
-  ${props => props.isMain &&
-    `border: 1px solid #EBEBEB;
-          `}
+  background-color: ${({isMain}) => isMain ? "white" : "transparent"};
+  border: ${({isMain}) => isMain ? "1px solid #EBEBEB" : "none"};
   width: 100%;
   display: flex;
   justify-content: center;
@@ -78,11 +69,7 @@ const Ul = styled.ul`
   cursor: pointer;
 `
 const Menus = styled.div`
-  color: #BBBBBE;
-
-  ${props => props.isMain &&
-    `color: #7E7E7E;
-          `}
+  color: ${({isMain}) => isMain ? "#7E7E7E" : "#f1f1f1"};
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -93,20 +80,14 @@ const Menu = styled.li`
   margin: 20px auto;
 `
 const SerchBar = styled.div`
-  background-color: transparent;
-
-  ${props => props.isMain &&
-    `background-color: #F5F5F7;
-          `}
+  border: ${({isMain}) => (isMain ? "1px solid #ebebeb" : "none")};
+  background-color: ${({isMain}) => (isMain ? "#F5F5F7" : "rgba(255,255,255,0.1)")};
   display: flex;
   justify-content: center;
   align-content: center;
   line-height: 23px;
   padding: 5px 10px;
   border: 1px solid #B5B2B2;
-  ${props => props.isMain &&
-    `border: none;
-          `}
 `
 const SerchLogo = styled.img`
   width: 20px;
@@ -119,7 +100,7 @@ const SerchInput = styled.input`
   padding: 5px;
   background-color: transparent;
   font-size: 14px;
-
+  color: #2f2f2f;
   :focus {
     outline: none;
   }
@@ -130,23 +111,17 @@ const LoginBtn = styled.button`
   background-color: transparent;
   border: transparent;
   cursor: pointer;
-  color: #C4C1C2;
-  
-  ${props => props.isMain &&
-    `color: #353535;
-          `}
+  color: ${({isMain}) => isMain ? "#353535" : "#F1F1F1"}
 `
 const SignBtn = styled.button`
   background-color: transparent;
   padding: 8px 15px;
-  border: solid 1px #BBBBBD;
+  border: solid 1px #eaeaea;
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
-  color: #C4C1C2;
-  ${props => props.isMain &&
-    `color: #353535;
-          `}
+  color: ${({isMain}) => isMain ? "#353535" : "#F1F1F1"};
 `
+
 
 export default NavBar;

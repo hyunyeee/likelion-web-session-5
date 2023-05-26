@@ -9,7 +9,6 @@ import NavBar from "./components/NavBar";
 function App() {
     return (
         <>
-            <>
                 <GlobalStyle/>
                 <BrowserRouter>
                     <NavBar/>
@@ -18,7 +17,6 @@ function App() {
                         <Route path={"/movie/:id"} element={<MovieDetail/>}/>
                     </Routes>
                 </BrowserRouter>
-            </>
         </>
     )
         ;
