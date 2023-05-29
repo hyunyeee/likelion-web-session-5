@@ -25,13 +25,7 @@ const Movies = (onClickMovie) => {
             .catch(function (error) { // 실패했을 때
                 console.log(error);
             });
-
     }, []);
-
-
-    useEffect(() => {
-        console.log(movieData)
-    }, [movieData])
 
 
     return (

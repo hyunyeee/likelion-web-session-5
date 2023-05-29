@@ -2,14 +2,18 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-import loadingLogo from "../assets/image/loadingLogo.svg"
+import loading from "../assets/image/loading.svg"
+import {useRecoilValue} from "recoil";
+import {apiResponseAtom} from "../atom/atom";
+import RecoMovie from "../components/RecoMovie";
 
 
 const MovieDetail = () => {
-    const { id } = useParams()
+    const {id} = useParams()
     const [isLoding, setIsLoading] = useState(false);
     const [movieData, setMovieData] = useState([]);
     const [releaseDate, setReleaseDate] = useState("");
+    const apiResponse = useRecoilValue(apiResponseAtom)
 
     useEffect(() => {
         const options = {
@@ -29,7 +33,7 @@ const MovieDetail = () => {
             .catch(function (error) { // 실패했을 때
                 console.log(error);
             });
-    }, []);
+    }, [id]);
 
     useEffect(() => {
         if (movieData.length !== 0) {
@@ -39,33 +43,44 @@ const MovieDetail = () => {
     }, [movieData]);
 
 
+    useEffect(() => {
+        console.log(apiResponse)
+    }, [apiResponse])
+
     return (
         <>
             <Wrapper>
-
                 {isLoding ?
                     <>
-                        <BgImgBox />
-                        <DataBox>
-                            <Poster src={`https://image.tmdb.org/t/p/w500`+ movieData.poster_path} alt={"movieImg"}/>
-                            <TextBox>
-                                <Text>
-                                    <Title>{movieData.title}</Title>
-                                    <YearCountry>{releaseDate}</YearCountry>
-                                    <hr />
-                                    <Average>평균 ★ {movieData.vote_average}</Average>
-                                    <hr />
-                                    <TxTBox>
-                                        {movieData.overview}
-                                    </TxTBox>
-                                </Text>
-                            </TextBox>
-                        </DataBox>
+                        <BgImgBox/>
+                        <Content>
+                            <DataBox>
+                                <Poster src={`https://image.tmdb.org/t/p/w500` + movieData.poster_path} alt={"movieImg"}/>
+                                <TextBox>
+                                    <Text>
+                                        <Title>{movieData.title}</Title>
+                                        <YearCountry>{releaseDate}</YearCountry>
+                                        <hr/>
+                                        <Average>평균 ★ {movieData.vote_average}</Average>
+                                        <hr/>
+                                        <TxTBox>
+                                            {movieData.overview}
+                                        </TxTBox>
+                                    </Text>
+                                </TextBox>
+                            </DataBox>
+
+                            {apiResponse && (
+                                <RecommendMovie>
+                                    <RecoMovie apiResponse={apiResponse}/>
+                                </RecommendMovie>
+                            )
+                            }
+                        </Content>
                     </>
                     :
-                    <Loading src={loadingLogo} />
+                    <Loading src={loading}/>
                 }
-
             </Wrapper>
         </>
     );
@@ -80,6 +95,11 @@ const BgImgBox = styled.div`
   width: 100%;
   height: 300px;
   background-color: #cecbcb;
+`
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 const TxTBox = styled.div`
   width: 500px;
@@ -125,10 +145,15 @@ const TextBox = styled.div`
   height: 100%;
 `
 const Loading = styled.img`
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
   display: block;
   margin: 15% auto;
+`
+const RecommendMovie = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 `
 
 

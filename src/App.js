@@ -4,11 +4,13 @@ import GlobalStyle from "../src/components/GlobalStyle"
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import MovieDetail from "./page/MovieDetail";
 import NavBar from "./components/NavBar";
+import {RecoilRoot} from "recoil";
 
 
 function App() {
     return (
         <>
+            <RecoilRoot>
                 <GlobalStyle/>
                 <BrowserRouter>
                     <NavBar/>
@@ -17,6 +19,8 @@ function App() {
                         <Route path={"/movie/:id"} element={<MovieDetail/>}/>
                     </Routes>
                 </BrowserRouter>
+            </RecoilRoot>
+
         </>
     )
         ;

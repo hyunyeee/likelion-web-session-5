@@ -1,18 +1,45 @@
 import styled from "styled-components";
 import Modal from "../components/Modal";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Movies from "../components/Movies";
 import {useNavigate} from "react-router-dom";
 import NavBar from "../components/NavBar";
+import axios from "axios";
+import {useRecoilState} from "recoil";
+import {apiResponseAtom} from "../atom/atom";
 
 
 const Main = () => {
     const [modalIsClicked, setModalIsClicked] = useState(false);
     const onClick = () => {
         setModalIsClicked((prev) => !prev)
-        console.log("로그인")
     }
+    const [apiResponse, setApiResponse] = useRecoilState(apiResponseAtom);
     const navigate = useNavigate();
+
+
+    useEffect(() => {
+        const options = {
+            method: "GET",
+            headers: {
+                accept: "application/json",
+                Authorization: "Bearer " + process.env.REACT_APP_API_KEY,
+            },
+        };
+        axios.get(`https://api.themoviedb.org/3/movie/top_rated?language=ko-KR`,
+            options
+        )
+            .then(function (response) { // 성공했을 때
+                setApiResponse(response.data.results)
+            })
+            .catch(function (error) { // 실패했을 때
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        console.log(apiResponse)
+    }, [apiResponse])
 
 
     return (
