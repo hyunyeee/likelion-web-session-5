@@ -37,10 +37,6 @@ const Main = () => {
             });
     }, []);
 
-    useEffect(() => {
-        console.log(apiResponse)
-    }, [apiResponse])
-
 
     return (
         <>

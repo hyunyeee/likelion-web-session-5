@@ -43,10 +43,6 @@ const MovieDetail = () => {
     }, [movieData]);
 
 
-    useEffect(() => {
-        console.log(apiResponse)
-    }, [apiResponse])
-
     return (
         <>
             <Wrapper>
